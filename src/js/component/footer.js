@@ -1,5 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
 
-export const Footer = () => (
-  <footer className="footer mt-auto py-3 text-center"></footer>
+const Footer = () => (
+  <footer className="footer mt-auto py-3 text-center">
+    Hecho por Héctor Labra -{" "}
+    <a
+      href="https://github.com/hectorlabra/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Mi GitHub
+    </a>
+  </footer>
 );
+
+export { Footer };

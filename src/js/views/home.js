@@ -10,55 +10,33 @@ const Home = () => {
     useContext(AppContext);
 
   return (
-    <>
-      <div className="container-fluid">
-        <Navbar
-          favorites={favorites}
-          addToFavorites={addToFavorites}
-          removeFromFavorites={removeFromFavorites}
-        />
-      </div>
-      <div className="container">
-        <h1 className="text-light m-3">Personajes</h1>
-      </div>
-      <div className="container">
-        <div className="row">
-          <div className="col-12 card-container d-flex flex-nowrap overflow-auto">
-            <div className="">
-              <CardsPersonajes />
-            </div>
-          </div>
+    <div className="bg-dark text-light min-vh-100">
+      <Navbar
+        favorites={favorites}
+        addToFavorites={addToFavorites}
+        removeFromFavorites={removeFromFavorites}
+      />
+      <div className="container mt-5">
+        <h1 className="mb-4">Personajes</h1>
+        <div className="card-container d-flex flex-nowrap overflow-auto">
+          <CardsPersonajes />
         </div>
       </div>
-      <br />
-      <br />
-      <div className="container">
-        <h1 className="text-light m-3">Planetas</h1>
-      </div>
-      <div className="container">
-        <div className="row">
-          <div className="col-12 card-container d-flex flex-nowrap overflow-auto">
-            <div className="">
-              <CardsPlanetas />
-            </div>
-          </div>
+
+      <div className="container mt-5">
+        <h1 className="mb-4">Planetas</h1>
+        <div className="card-container d-flex flex-nowrap overflow-auto">
+          <CardsPlanetas />
         </div>
       </div>
-      <br />
-      <br />
-      <div className="container">
-        <h1 className="text-light m-3">Vehiculos</h1>
-      </div>
-      <div className="container">
-        <div className="row">
-          <div className="col-12 card-container d-flex flex-nowrap overflow-auto">
-            <div className="">
-              <CardsVehiculos />
-            </div>
-          </div>
+
+      <div className="container mt-5 mb-5">
+        <h1 className="mb-4">Vehiculos</h1>
+        <div className="card-container d-flex flex-nowrap overflow-auto">
+          <CardsVehiculos />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
