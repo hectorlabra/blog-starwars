@@ -21,6 +21,11 @@ const CardsVehiculos = () => {
     }
   };
 
+  const getVehiculoId = (url) => {
+    const matches = url.match(/\/(\d+)\/$/);
+    return matches ? matches[1] : "";
+  };
+
   useEffect(() => {
     fetch("https://swapi.dev/api/vehicles/")
       .then((response) => response.json())
@@ -28,9 +33,13 @@ const CardsVehiculos = () => {
   }, []);
 
   return (
-    <div className="card-container d-flex flex-nowrap overflow-auto">
+    <div className="card-container d-flex flex-wrap justify-content-center">
       {vehiculos.map((vehiculo) => (
-        <div className="card" style={{ width: "18rem" }} key={vehiculo.url}>
+        <div
+          className="card mb-3 me-3"
+          style={{ width: "18rem" }}
+          key={vehiculo.url}
+        >
           <img
             src={`https://starwars-visualguide.com/assets/img/vehicles/${getVehiculoId(
               vehiculo.url
@@ -38,37 +47,29 @@ const CardsVehiculos = () => {
             className="card-img-top"
             alt={vehiculo.name}
           />
-          <div className="card-body">
+          <div className="card-body text-white bg-dark">
             <h5 className="card-title">{vehiculo.name}</h5>
             <p className="card-text">Modelo: {vehiculo.model}</p>
             <p className="card-text">Fabricante: {vehiculo.manufacturer}</p>
             <Link
               to={`/vehiculos/${getVehiculoId(vehiculo.url)}`}
-              className="btn btn-outline-light"
+              className="btn btn-primary btn-block"
             >
               Aprende más!
             </Link>
             <button
-              className="btn btn-outline-light position-absolute bottom-5 end-0 "
+              className={`btn position-absolute bottom-0 end-0 ${
+                isFavorite(vehiculo) ? "btn-danger" : "btn-light"
+              }`}
               onClick={() => toggleFavorite(vehiculo)}
             >
-              <FontAwesomeIcon
-                icon={faHeart}
-                style={{
-                  color: isFavorite(vehiculo) ? "rgb(5, 223, 252)" : "white",
-                }}
-              />
+              <FontAwesomeIcon icon={faHeart} />
             </button>
           </div>
         </div>
       ))}
     </div>
   );
-};
-
-const getVehiculoId = (url) => {
-  const matches = url.match(/\/(\d+)\/$/);
-  return matches ? matches[1] : "";
 };
 
 export { CardsVehiculos };
