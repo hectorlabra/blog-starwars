@@ -11,58 +11,54 @@ const Navbar = () => {
     useContext(AppContext);
 
   return (
-    <div className="container-fluid ">
-      <div className="row">
-        <div className="main-content">
-          <nav className="navbar navbar-light bg-back  fixed-top">
-            <Link to="/">
-              <img className="logo" src={star} alt="Star"></img>
-            </Link>
+    <nav
+      className="navbar navbar-expand-lg navbar-dark"
+      style={{ backgroundColor: "#000000" }}
+    >
+      <div className="container-fluid">
+        <Link to="/">
+          <img className="logo" src={star} alt="Star"></img>
+        </Link>
 
-            <div className="">
-              <div className=" dropdown">
-                <button
-                  className=" btndrop dropdown-toggle"
-                  type="button"
-                  id="favoritesDropdown"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Favoritos ({favorites.length})
-                </button>
-                <ul
-                  className="dropdown-menu"
-                  aria-labelledby="favoritesDropdown"
-                >
-                  {favorites.length > 0 ? (
-                    favorites.map((item) => (
-                      <li key={item.url}>
-                        <p className="favorite-item">
-                          {item.name}
-                          <button
-                            className="btn-delete"
-                            onClick={() => removeFromFavorites(item)}
-                          >
-                            <FontAwesomeIcon icon={faTrash} />
-                          </button>
-                        </p>
-                      </li>
-                    ))
-                  ) : (
-                    <li>
-                      <p className="dropdown-item text-center">
-                        No hay personajes <br />
-                        favoritos
-                      </p>
-                    </li>
-                  )}
-                </ul>
-              </div>
-            </div>
-          </nav>
+        <div className="">
+          <div className=" dropdown">
+            <button
+              className=" btndrop dropdown-toggle"
+              type="button"
+              id="favoritesDropdown"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Favoritos ({favorites.length})
+            </button>
+            <ul className="dropdown-menu" aria-labelledby="favoritesDropdown">
+              {favorites.length > 0 ? (
+                favorites.map((item) => (
+                  <li key={item.url}>
+                    <p className="favorite-item">
+                      {item.name}
+                      <button
+                        className="btn-delete"
+                        onClick={() => removeFromFavorites(item)}
+                      >
+                        <FontAwesomeIcon icon={faTrash} />
+                      </button>
+                    </p>
+                  </li>
+                ))
+              ) : (
+                <li>
+                  <p className="dropdown-item text-center">
+                    No hay personajes <br />
+                    favoritos
+                  </p>
+                </li>
+              )}
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
