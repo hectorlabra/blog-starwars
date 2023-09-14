@@ -9,8 +9,8 @@ const CardsPlanetas = () => {
   const { favorites, addToFavorites, removeFromFavorites } =
     useContext(AppContext);
 
-  const isFavorite = (planetas) => {
-    return favorites.some((fav) => fav.url === planetas.url);
+  const isFavorite = (planeta) => {
+    return favorites.some((fav) => fav.url === planeta.url);
   };
 
   const toggleFavorite = (planeta) => {
@@ -20,6 +20,7 @@ const CardsPlanetas = () => {
       addToFavorites(planeta);
     }
   };
+
   const getPlanetaId = (url) => {
     const matches = url.match(/\/(\d+)\/$/);
     return matches ? matches[1] : "";
@@ -34,16 +35,22 @@ const CardsPlanetas = () => {
   const handleLearnMore = (planetaId) => {
     fetch(`https://swapi.dev/api/planets/${planetaId}/`)
       .then((response) => response.json())
-      .then((data) => {})
+      .then((data) => {
+        console.log("Planeta details:", data);
+      })
       .catch((error) => {
         console.error("Error fetching planeta details:", error);
       });
   };
 
   return (
-    <div className="card-container d-flex flex-nowrap overflow-auto">
+    <div className="card-container d-flex flex-wrap justify-content-center">
       {planetas.map((planeta) => (
-        <div className="card" style={{ width: "18rem" }} key={planeta.url}>
+        <div
+          className="card mb-3 me-3"
+          style={{ width: "18rem" }}
+          key={planeta.url}
+        >
           <img
             src={`https://starwars-visualguide.com/assets/img/planets/${getPlanetaId(
               planeta.url
@@ -51,27 +58,24 @@ const CardsPlanetas = () => {
             className="card-img-top"
             alt={planeta.name}
           />
-          <div className="card-body">
+          <div className="card-body text-white bg-dark">
             <h5 className="card-title">{planeta.name}</h5>
             <p className="card-text">Clima: {planeta.climate}</p>
             <p className="card-text">Terreno: {planeta.terrain}</p>
             <Link
               to={`/planeta/${getPlanetaId(planeta.url)}`}
-              className="btn btn-outline-light"
+              className="btn btn-primary btn-block"
               onClick={() => handleLearnMore(getPlanetaId(planeta.url))}
             >
               Aprende más!
             </Link>
             <button
-              className="btn btn-outline-light position-absolute bottom-5 end-0 "
+              className={`btn position-absolute bottom-0 end-0 ${
+                isFavorite(planeta) ? "btn-danger" : "btn-light"
+              }`}
               onClick={() => toggleFavorite(planeta)}
             >
-              <FontAwesomeIcon
-                icon={faHeart}
-                style={{
-                  color: isFavorite(planeta) ? "rgb(5, 223, 252)" : "white",
-                }}
-              />
+              <FontAwesomeIcon icon={faHeart} />
             </button>
           </div>
         </div>
